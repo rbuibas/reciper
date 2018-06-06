@@ -1,0 +1,7 @@
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.test {
+  padding: 0.4in;
+  text-align: right;
+  color: rgb(16, 139, 0);
+}

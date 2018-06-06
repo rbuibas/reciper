@@ -1,0 +1,17 @@
+.offline {
+    text-align: center;
+    text-shadow: 3px;
+    box-sizing: border-box;
+    width: 300px;
+    padding: 10px;
+    border: 7px solid red;
+}
+
+.online {
+    text-align: center;
+    text-shadow: 3px;
+    box-sizing: border-box;
+    width: 300px;
+    padding: 10px;
+    border: 7px solid greenyellow;
+}
