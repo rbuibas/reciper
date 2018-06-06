@@ -7,7 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SnifferComponent implements OnInit {
 
-  constructor() { }
+  allowNewServer = false;
+  serverCreationStatus = 'No Server Created';
+  serverName = '';
+  constructor() {
+    setTimeout(() => {
+      this.allowNewServer = true;
+    }, 2000)
+   }
+  
+  onCreateServer() {
+    this.serverCreationStatus = 'Server created. Name: ' + this.serverName;
+    //console.log("testing", this.serverCreationStatus);
+  }
+
+  onUpdateServerName(event: Event) {
+    this.serverName = (<HTMLInputElement>event.target).value;
+  }
 
   ngOnInit() {
   }

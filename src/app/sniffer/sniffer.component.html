@@ -2,7 +2,21 @@
   Sniffer is presenting the Big and the Small.
 </p>
 <h3>Server Management</h3>
-<button class="btn btn-primary">Add Server</button>
+<label>Server Name</label>
+<!-- <input
+  type="text" class="form-control" 
+  (input)="onUpdateServerName($event)"> -->
+<input
+  type="text" class="form-control" 
+[(ngModel)]="serverName">
+
+<button 
+class="btn btn-primary"
+[disabled] = "!allowNewServer"
+(click)="onCreateServer()">
+Add Server</button>
+<p>{{ serverCreationStatus }} </p>
+<!-- <p>{{ serverName }}</p> -->
 <hr>
 <app-small-sniffer></app-small-sniffer>
 <hr>
