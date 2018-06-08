@@ -1,8 +1,9 @@
-<p class="online">
+<!-- <p class="online">
   Small sniffer is connected.
-</p>
+</p> -->
 
-<p>
+<p [ngStyle]="{backgroundColor: getColor()}"
+   [ngClass]="{server_online: serverStatus === 'online'}">
   <b>Server ID</b>: {{ serverID }}.
 <br>
 <b>Server status</b>: {{getServerStatus()}}

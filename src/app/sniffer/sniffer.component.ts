@@ -10,6 +10,9 @@ export class SnifferComponent implements OnInit {
   allowNewServer = false;
   serverCreationStatus = 'No Server Created';
   serverName = '';
+  serverCreated = false;
+  servers = ['TestServer 1', 'TestServer 2'];
+
   constructor() {
     setTimeout(() => {
       this.allowNewServer = true;
@@ -18,6 +21,8 @@ export class SnifferComponent implements OnInit {
   
   onCreateServer() {
     this.serverCreationStatus = 'Server created. Name: ' + this.serverName;
+    this.servers.push(this.serverName);
+    this.serverCreated = true;
     //console.log("testing", this.serverCreationStatus);
   }
 

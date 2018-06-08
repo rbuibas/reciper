@@ -12,6 +12,11 @@ export class SmallSnifferComponent implements OnInit {
 
   constructor() { 
     this.serverID = 11;
+    this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+  }
+
+  getColor() {
+    return this.serverStatus === 'online' ? 'green' : 'red';
   }
 
   getServerStatus() {
