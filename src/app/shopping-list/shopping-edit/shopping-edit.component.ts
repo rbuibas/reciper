@@ -1,12 +1,11 @@
-import { 
-  Component, 
-  OnInit, 
-  ElementRef, 
-  ViewChild,
-  EventEmitter, 
+import {
+  Component,
+  OnInit,
+  EventEmitter,
   Output} from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -15,9 +14,6 @@ import { ShoppingListService } from '../shopping-list.service';
 })
 export class ShoppingEditComponent implements OnInit {
 
-  @ViewChild('nameInput') nameInputRef: ElementRef;
-  @ViewChild('ammountInput') ammountInputRef: ElementRef;
-
   @Output() ingredientAdded = new EventEmitter<Ingredient>();
 
   constructor(private slServ: ShoppingListService) { }
@@ -25,11 +21,11 @@ export class ShoppingEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddClick() {
-    const tempName = this.nameInputRef.nativeElement.value;
-    const tempAmmount = this.ammountInputRef.nativeElement.value;
-    const newIngredient = new Ingredient(tempName, tempAmmount);
+  onAddClick(form: NgForm) {
+    const value = form.value;
+    const newIngredient = new Ingredient(value.name, value.ammount);
     this.slServ.addIngredient(newIngredient);
+    form.reset();
   }
 
   onDelClick() {
