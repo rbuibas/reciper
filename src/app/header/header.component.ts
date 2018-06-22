@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { PersistenceService } from '../shared/persistence.service';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-header',
@@ -9,8 +11,21 @@ export class HeaderComponent implements OnInit {
 
   @Output() selectedPane = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private persist: PersistenceService) { }
 
   ngOnInit() {
+  }
+
+  onSave() {
+    this.persist.storeData()
+      .subscribe(
+        (response: Response) => {
+          console.log(response);
+        }
+      );
+  }
+
+  onFetch() {
+    this.persist.fetchData();
   }
 }
