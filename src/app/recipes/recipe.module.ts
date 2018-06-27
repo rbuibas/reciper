@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownDirective } from '../shared/dropdown.directive';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { RecipesRoutingModule } from './recipes-routing.module';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { RouterModule } from '@angular/router';
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        RouterModule
+        RecipesRoutingModule
     ]
 })
 export class RecipesModule {
