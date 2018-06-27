@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PersistenceService } from '../shared/persistence.service';
 import { Response } from '@angular/http';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
 
   @Output() selectedPane = new EventEmitter<string>();
 
-  constructor(private persist: PersistenceService) { }
+  constructor(private persist: PersistenceService,
+              private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -28,4 +30,9 @@ export class HeaderComponent implements OnInit {
   onFetch() {
     this.persist.fetchData();
   }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
 }

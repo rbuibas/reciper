@@ -9,10 +9,12 @@
         <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/signup">Register</a></li>
-        <li><a routerLink="/signin">Sign In</a></li>
+        <ng-template [ngIf]="!isAuthenticated()">
+            <li><a routerLink="/signup">Register</a></li>
+            <li><a routerLink="/signin">Sign In</a></li>
+        </ng-template>
         <!-- // why here and not on the <a></a> -->
-        <li class="dropdown" appDropdown>
+        <li class="dropdown" appDropdown *ngIf="isAuthenticated()">
           <a style="cursor: pointer;"
           class="dropdown dropdown-toggle" 
           role="button"
