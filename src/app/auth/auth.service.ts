@@ -17,6 +17,11 @@ export class AuthService {
         error => console.error(error));
   }
 
+  signOut() {
+    firebase.auth().signOut();
+    this.token = null;
+  }
+
   signinUser(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(response => {
@@ -37,6 +42,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
+    // will also match undefined ?
     return this.token != null;
   }
 
