@@ -28,8 +28,7 @@ import { AuthGuardService } from '../auth/auth-guard.service';
     ShoppingListService,
     RecipeService,
     PersistenceService,
-    AuthService,
-    AuthGuardService
+    AuthService
   ]
 })
 export class CoreModule { }
