@@ -4,10 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'recipes', loadChildren: './recipes/recipe.module#RecipesModule'},
+  {path: 'recipes', loadChildren: './recipes/recipe.module#RecipesModule', canLoad: [AuthGuardService]},
   {path: 'shopping-list', component: ShoppingListComponent}
 ];
 
