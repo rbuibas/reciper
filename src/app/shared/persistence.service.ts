@@ -31,7 +31,7 @@ export class PersistenceService {
     // so we can listen to the progress (manually create request) / won't work on put()
     const request = new HttpRequest('PUT', url, this.recipeService.getRecipes(), {
       reportProgress: true,
-      params: logInparams // with this you can listen (subscribe) and use 'total' and 'loaded' params to calculate the progress bar
+      // params: logInparams // with this you can listen (subscribe) and use 'total' and 'loaded' params to calculate the progress bar
     });
     return this.httpClient.request(request);
 
@@ -45,7 +45,7 @@ export class PersistenceService {
     return this.httpClient.get<Recipe[]>('https://recipe-book-rbuibas.firebaseio.com/recipes.json', {
       observe: 'body', // get the whole response
       responseType: 'json', // default is json; blob for downloading a file
-      params: logInparams
+      // params: logInparams
     })
     .pipe(map(
       (recipes) => { // assumes we get JSON

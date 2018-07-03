@@ -8,7 +8,8 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { RecipeService } from '../recipes/recipe.service';
 import { PersistenceService } from '../shared/persistence.service';
 import { AuthService } from '../auth/auth.service';
-import { AuthGuardService } from '../auth/auth-guard.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../shared/auth.interceptor.ts';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { AuthGuardService } from '../auth/auth-guard.service';
     ShoppingListService,
     RecipeService,
     PersistenceService,
-    AuthService
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } // weird, rare usecase ?
   ]
 })
 export class CoreModule { }
