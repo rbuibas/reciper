@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Response } from '@angular/http';
@@ -20,22 +20,32 @@ export class PersistenceService {
 
   storeData() {
     const token = this.authService.getToekn();
-    return this.httpClient.put('https://recipe-book-rbuibas.firebaseio.com/recipes.json?auth=' + token, this.recipeService.getRecipes());
+    const logInparams = new HttpParams().set('auth', token);
+    return this.httpClient.put('https://recipe-book-rbuibas.firebaseio.com/recipes.json', this.recipeService.getRecipes(), {
+      observe: 'body',
+      params: logInparams
+      // headers: new HttpHeaders().set('Test_entry', 'test') // check if this works TODO
+    });
   }
 
   fetchData() {
 
     const token = this.authService.getToekn();
-
-    return this.httpClient.get<Recipe[]>('https://recipe-book-rbuibas.firebaseio.com/recipes.json?auth=' + token)
+    const logInparams = new HttpParams().set('auth', token);
+    // return this.httpClient.get<Recipe[]>('https://recipe-book-rbuibas.firebaseio.com/recipes.json?auth=' + token)
+    return this.httpClient.get<Recipe[]>('https://recipe-book-rbuibas.firebaseio.com/recipes.json', {
+      observe: 'body', // get the whole response
+      responseType: 'json', // default is json; blob for downloading a file
+      params: logInparams
+    })
     .pipe(map(
       (recipes) => { // assumes we get JSON
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];
           }
-          return recipes;
         }
+        return recipes;
       }
     )).subscribe(
         (recipes: Recipe[]) => {
