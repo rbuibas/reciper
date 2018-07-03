@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 
 import { RecipeService } from '../recipes/recipe.service';
-import { Response } from '@angular/http';
 import { Recipe } from '../recipes/recipe.model';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
@@ -21,11 +20,21 @@ export class PersistenceService {
   storeData() {
     const token = this.authService.getToekn();
     const logInparams = new HttpParams().set('auth', token);
-    return this.httpClient.put('https://recipe-book-rbuibas.firebaseio.com/recipes.json', this.recipeService.getRecipes(), {
-      observe: 'body',
-      params: logInparams
-      // headers: new HttpHeaders().set('Test_entry', 'test') // check if this works TODO
+    const url = 'https://recipe-book-rbuibas.firebaseio.com/recipes.json';
+
+    // return this.httpClient.put('https://recipe-book-rbuibas.firebaseio.com/recipes.json', this.recipeService.getRecipes(), {
+    //   observe: 'body',
+    //   params: logInparams
+    //   // headers: new HttpHeaders().set('Test_entry', 'test') // check if this works TODO
+    // });
+
+    // so we can listen to the progress (manually create request) / won't work on put()
+    const request = new HttpRequest('PUT', url, this.recipeService.getRecipes(), {
+      reportProgress: true,
+      params: logInparams // with this you can listen (subscribe) and use 'total' and 'loaded' params to calculate the progress bar
     });
+    return this.httpClient.request(request);
+
   }
 
   fetchData() {

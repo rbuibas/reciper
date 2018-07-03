@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   onSave() {
     this.persist.storeData()
       .subscribe(
-        (response: Response) => {
+        (response) => {
           console.log(response);
         }
       );
