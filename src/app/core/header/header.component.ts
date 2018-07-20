@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PersistenceService } from '../shared/persistence.service';
-import { Response } from '@angular/http';
-import { AuthService } from '../auth/auth.service';
+import { PersistenceService } from '../../shared/persistence.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +20,7 @@ export class HeaderComponent implements OnInit {
   onSave() {
     this.persist.storeData()
       .subscribe(
-        (response: Response) => {
+        (response) => {
           console.log(response);
         }
       );
