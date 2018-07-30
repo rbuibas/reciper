@@ -124,5 +124,10 @@
       }
     }
   },
-  "defaultProject": "ass2app"
+  "defaultProject": "ass2app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
